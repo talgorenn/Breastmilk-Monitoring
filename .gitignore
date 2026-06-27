@@ -16,7 +16,7 @@ output/
 !images/*.png
 
 # Data (large — not tracked in git)
-data/
+/data/
 data.zip
 real experiment palmSense/
 
@@ -46,3 +46,6 @@ Thumbs.db
 .vscode/
 .idea/
 *.code-workspace
+
+# Claude Code
+.claude/

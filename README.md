@@ -273,6 +273,60 @@ All models use a group-based 70/15/15 split by replicate ID to prevent data leak
 
 ---
 
+## Experiments
+
+Hardware platform: **MAX30001G EV Kit** (Analog Devices) — a single-chip analog front-end for ECG and bioimpedance measurement.
+
+---
+
+### Experiment 1 — Potato Tissue BioZ (Hardware Validation)
+
+**Date**: June 4, 2026
+**Purpose**: Validate that the MAX30001G can detect ionic composition differences in biological tissue — a prerequisite before moving to breast tissue measurements.
+
+**Setup**:
+- Configuration: bipolar 2-electrode (sense and drive share the same physical contacts via DP_BP / DN_BN jumpers)
+- Electrodes: ECG snap electrodes inserted directly into potato flesh
+- Samples: dry potato (control) vs. saline-soaked potato
+- Frequency sweep: 6 manual points — 125, 250, 500, 1000, 2000, 4000 Hz
+
+**Measured |Z| at each frequency:**
+
+| Frequency | Dry \|Z\| (kΩ) | Saline \|Z\| (kΩ) | Difference |
+|-----------|---------------|------------------|------------|
+| 125 Hz | 870.4 | 871.5 | +0.1% |
+| 250 Hz | 759.3 | 761.8 | +0.3% |
+| 500 Hz | 571.8 | 525.7 | −8.1% |
+| 1 kHz | 359.9 | 311.8 | −13.4% |
+| 2 kHz | 199.6 | 130.3 | −34.7% |
+| 4 kHz | 103.2 | 36.2 | **−64.9%** |
+
+**Cole-Cole model fit** (Z(ω) = R∞ + (R0 − R∞) / (1 + (jωτ)^α)):
+
+| Parameter | Dry Potato | Saline Potato |
+|-----------|-----------|---------------|
+| fc (characteristic frequency) | 415 Hz | 343 Hz |
+| α (dispersion exponent) | 0.94 | 1.00 |
+
+**Key findings**:
+- At 4 kHz, saline tissue shows **64.9% lower impedance** than dry tissue, confirming increased extracellular ionic conductivity from Na⁺ and Cl⁻ ions
+- Below 250 Hz both samples are indistinguishable — cell membranes block ionic current regardless of extracellular salt content
+- α = 1.00 for saline indicates Debye relaxation (single dominant time constant, consistent with a uniform ionic medium); dry potato α = 0.94 reflects distributed relaxation from heterogeneous tissue
+
+**Limitations**:
+- Bipolar electrodes include electrode contact impedance in the reading — a tetrapolar (4-electrode) setup would isolate tissue impedance alone
+- MAX30001G outputs magnitude |Z| only, not phase — Cole-Cole reconstruction is estimated from model fitting rather than direct measurement
+
+Full report: [`experiments/experiment_1/potato_bioz_report.html`](experiments/experiment_1/potato_bioz_report.html)
+
+Data: [`experiments/experiment_1/data/`](experiments/experiment_1/data/)
+
+---
+
+### Experiment 2 — *(coming soon)*
+
+---
+
 ## Setup
 
 ```bash
