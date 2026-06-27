@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Model outputs and plots
+*.pkl
+*.pt
+output/
+*.png
+!images/*.png
+
+# Data (large — not tracked in git)
+data/
+data.zip
+real experiment palmSense/
+
+# Non-code project folders
+Demo/
+DemoNew/
+EDA graphs/
+Final Presentation/
+Guides & Reports/
+Hardware/
+Poster/
+Poster Images/
+Price Proposal/
+Templates/
+projectReport/
+
+# Office and PDF files
+*.pptx
+*.docx
+*.pdf
+
+# Windows
+desktop.ini
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
